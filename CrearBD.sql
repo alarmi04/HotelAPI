@@ -1,0 +1,30 @@
+CREATE DATABASE hotel;
+
+CREATE TABLE IF NOT EXISTS `reservas` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`fechaEntrada` DATE NOT NULL,
+`fechaSalida` DATE NOT NULL,
+`hora` TIME NOT NULL,
+`adultos` int NOT NULL,
+`menores` int NOT NULL,
+`habitaciones` int NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`nombre` varchar(30) NOT NULL,
+`correo` varchar(50) NOT NULL,
+`clave` varchar(255) NOT NULL,
+`telefono` varchar(20) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+ALTER TABLE reservas
+ADD COLUMN usuario_id INT(10) NOT NULL;
+
+ALTER TABLE reservas
+ADD CONSTRAINT fk_reservas_pedidos
+FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
