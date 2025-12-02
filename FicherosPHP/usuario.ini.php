@@ -6,13 +6,15 @@ class Usuario
     private $nombre;
     private $correo;
     private $clave;
+    private $telefono;
 
-    public function __construct($id, $nombre, $correo, $clave)
+    public function __construct($id, $nombre, $correo, $clave, $telefono)
     {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->correo = $correo;
         $this->clave = $clave;
+        $this->telefono = $telefono;
     }
 
     public function getId()
@@ -55,20 +57,21 @@ class Usuario
         $this->clave = $value;
     }
 
-    function registrarUsuario($conexion, $input)
+    function registrarUsuario($conexion)
     {
-        // $input = json_decode(file_get_contents('php://input'), true);
-        $sql = "INSERT INTO usuario (nombre, correo, clave, telefono) VALUES ('{$input['nombre']}', '{$input['correo']}', '{$input['clave']}', '{$input['telefono']}')";
-        echo $sql;
+        $sql = "INSERT INTO usuario (nombre, correo, clave, telefono) 
+                VALUES ('{$this->nombre}', '{$this->correo}', '{$this->clave}', '{$this->telefono}')";
         $conexion->exec($sql);
-        $usuId = $conexion->lastInsertId();
-        if ($usuId) {
-            $input['id'] = $usuId;
-            header("HTTP/1.1 200 OK");
-            echo json_encode($input);
+        $this->id = $conexion->lastInsertId();
+
+        if ($this->id) {
+            echo "Usuario registrado correctamente. ID: " . $this->id;
+            exit();
+        } else {
+            echo "Error al registrar el usuario.";
             exit();
         }
     }
 }
-
+    
 ?>
