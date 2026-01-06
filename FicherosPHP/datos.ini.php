@@ -3,15 +3,12 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 
-// Incluir configuración y modelos
-include_once 'database.php';
-include_once 'Usuario.php';
-include_once 'Reserva.php';
+include_once 'conexion.ini.php';
+include_once 'usuario.ini.php';
+include_once 'reserva.ini.php';
 
-// Obtener el método HTTP
 $metodo = $_SERVER['REQUEST_METHOD'];
 
-// Obtener la acción del parámetro GET
 $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 
 // Obtener datos JSON para POST/PUT/DELETE

@@ -157,11 +157,11 @@ class Reserva
 
     public function leerPorUsuario($conexion)
     {
-        $sql = "SELECT r.id, r.fechaEntrada, r.fechaSalida, r.hora, r.adultos, 
-                       r.menores, r.habitaciones
-                FROM reservas r
-                WHERE r.usuario_id = {$this->usuario_id}
-                ORDER BY r.fechaEntrada DESC";
+        $sql = "SELECT id, fechaEntrada, fechaSalida, hora, adultos, 
+                       menores, habitaciones
+                FROM reservas
+                WHERE usuario_id = {$this->usuario_id}
+                ORDER BY fechaEntrada DESC";
 
         $resultado = $conexion->query($sql);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
