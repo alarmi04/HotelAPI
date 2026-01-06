@@ -11,7 +11,6 @@ $metodo = $_SERVER['REQUEST_METHOD'];
 
 $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 
-// Obtener datos JSON para POST/PUT/DELETE
 $data = json_decode(file_get_contents("php://input"));
 
 // ============================================
