@@ -187,16 +187,5 @@ class Reserva
         return $conexion->exec($sql);
     }
 
-    public function verificarDisponibilidad($conexion)
-    {
-        $sql = "SELECT COUNT(*) as total_reservas 
-                FROM reservas 
-                WHERE (fechaEntrada BETWEEN '{$this->fechaEntrada}' AND '{$this->fechaSalida}')
-                   OR (fechaSalida BETWEEN '{$this->fechaEntrada}' AND '{$this->fechaSalida}')
-                   OR ('{$this->fechaEntrada}' BETWEEN fechaEntrada AND fechaSalida)";
-
-        $resultado = $conexion->query($sql);
-        return $resultado->fetch(PDO::FETCH_ASSOC);
-    }
 }
 ?>
